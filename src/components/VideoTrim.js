@@ -9,7 +9,7 @@ function VideoTrim() {
 
     const handleSubmit = event => {
         event.preventDefault();
-        axios.post(`http://localhost:8000/api/trim/${videoId}/`, { start, end })
+        axios.post(`http://192.168.29.170:8000/api/trim/${videoId}/`, { start, end })
             .then(response => alert('Video trimmed successfully'))
             .catch(error => alert('Error trimming video'));
     };

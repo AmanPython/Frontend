@@ -8,7 +8,7 @@ function ShareVideo() {
 
     const handleSubmit = event => {
         event.preventDefault();
-        axios.get(`http://localhost:8000/api/share/${videoId}/`)
+        axios.get(`http://192.168.29.170:8000/api/share/${videoId}/`)
             .then(response => {
                 setLink(response.data.link);
             })

@@ -19,7 +19,7 @@ function VideoUpload() {
         formData.append("title", title); // Append title to the form data
         formData.append("video_file", file);
 
-        axios.post("http://localhost:8000/api/upload/", formData, {
+        axios.post("http://192.168.29.170:8000/api/upload/", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

@@ -8,7 +8,7 @@ function VideoMerge() {
     const handleSubmit = event => {
         event.preventDefault();
         const ids = videoIds.split(',').map(id => id.trim());
-        axios.post('http://localhost:8000/api/merge/', { video_ids: ids })
+        axios.post('http://192.168.29.170:8000/api/merge/', { video_ids: ids })
             .then(response => alert('Videos merged successfully'))
             .catch(error => alert('Error merging videos'));
     };
