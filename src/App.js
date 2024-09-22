@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import VideoUpload from './components/VideoUpload';
-import VideoList from './components/VideoList';
-import VideoTrim from './components/VideoTrim';
-import VideoMerge from './components/VideoMerge';
-import ShareVideo from './components/ShareVideo';
+import React, { useState, useEffect } from 'react';
+import { Container } from '@mui/material';
+import Dashboard from './components/Dashboard';
 import UserRegistration from './components/UserRegistration';
 import UserLogin from './components/UserLogin';
 
@@ -12,33 +9,41 @@ function App() {
 
   const checkAuth = () => {
     const token = localStorage.getItem('accessToken');
-    if (token) {
-      setIsAuthenticated(true);
-    }
+    console.log("Token found:", token);  // For debugging
+    setIsAuthenticated(!!token);
   };
 
-  React.useEffect(() => {
-    checkAuth();
+  // This useEffect will now correctly re-run whenever `isAuthenticated` changes
+  useEffect(() => {
+    window.addEventListener("storage", checkAuth);  // Listen to storage changes
+    checkAuth();  // Initial check on mount
+    return () => {
+      window.removeEventListener("storage", checkAuth);
+    };
   }, []);
 
+  const handleLogin = (token) => {
+    console.log("Setting token and updating auth status"); // Debugging line
+    localStorage.setItem('accessToken', token);
+    setIsAuthenticated(true);  // Directly set authenticated to true
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    setIsAuthenticated(false);  // Directly set authenticated to false
+  };
+
   return (
-    <div>
+    <Container>
       {!isAuthenticated ? (
-        <div>
+        <React.Fragment>
           <UserRegistration />
-          <UserLogin />
-        </div>
+          <UserLogin onLoginSuccess={handleLogin} />
+        </React.Fragment>
       ) : (
-        <div>
-          <h2>Welcome! You are logged in.</h2>
-          <VideoList />
-          <VideoUpload />
-          <VideoTrim />
-          <VideoMerge />
-          <ShareVideo />
-        </div>
+        <Dashboard onLogout={handleLogout} />
       )}
-    </div>
+    </Container>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import BASE_URL from '../config'; 
+import BASE_URL from '../config';
+import { TextField, Button, Typography, Paper, Container } from '@mui/material';
 
 function UserRegistration() {
   const [username, setUsername] = useState('');
@@ -23,34 +24,45 @@ function UserRegistration() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Username" 
-          value={username} 
-          onChange={(e) => setUsername(e.target.value)} 
-          required 
-        />
-        <input 
-          type="email" 
-          placeholder="Email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
-        />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          required 
-        />
-        <button type="submit">Register</button>
-      </form>
-      <p>{message}</p>
-    </div>
+    <Container maxWidth="xs">
+      <Paper style={{ padding: 20, marginTop: 50 }}>
+        <Typography variant="h5">Register</Typography>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Username"
+            type="text"
+            placeholder="Username"
+            fullWidth
+            margin="normal"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <TextField
+            label="Email"
+            type="email"
+            placeholder="Email"
+            fullWidth
+            margin="normal"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <TextField
+            label="Password"
+            type="password"
+            placeholder="Password"
+            fullWidth
+            margin="normal"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <Button type="submit" color="primary" variant="contained" style={{ marginTop: 20 }}>Register</Button>
+        </form>
+        <Typography style={{ marginTop: 20 }}>{message}</Typography>
+      </Paper>
+    </Container>
   );
 }
 
