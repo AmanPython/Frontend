@@ -1,6 +1,5 @@
-// src/components/ShareVideo.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from './axiosInstance';
 
 function ShareVideo() {
     const [videoId, setVideoId] = useState('');
@@ -8,7 +7,7 @@ function ShareVideo() {
 
     const handleSubmit = event => {
         event.preventDefault();
-        axios.get(`http://192.168.29.170:8000/api/share/${videoId}/`)
+        axiosInstance.get(`/api/share/${videoId}/`)
             .then(response => {
                 setLink(response.data.link);
             })

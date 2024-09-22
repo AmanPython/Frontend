@@ -1,6 +1,6 @@
 // src/components/VideoMerge.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from './axiosInstance';
 
 function VideoMerge() {
     const [videoIds, setVideoIds] = useState('');
@@ -8,7 +8,7 @@ function VideoMerge() {
     const handleSubmit = event => {
         event.preventDefault();
         const ids = videoIds.split(',').map(id => id.trim());
-        axios.post('http://192.168.29.170:8000/api/merge/', { video_ids: ids })
+        axiosInstance.post('/api/merge/', { video_ids: ids })
             .then(response => alert('Videos merged successfully'))
             .catch(error => alert('Error merging videos'));
     };

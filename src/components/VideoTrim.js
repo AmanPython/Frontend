@@ -1,6 +1,6 @@
 // src/components/VideoTrim.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from './axiosInstance';
 
 function VideoTrim() {
     const [videoId, setVideoId] = useState('');
@@ -9,7 +9,7 @@ function VideoTrim() {
 
     const handleSubmit = event => {
         event.preventDefault();
-        axios.post(`http://192.168.29.170:8000/api/trim/${videoId}/`, { start, end })
+        axiosInstance.post(`/api/trim/${videoId}/`, { start, end })
             .then(response => alert('Video trimmed successfully'))
             .catch(error => alert('Error trimming video'));
     };

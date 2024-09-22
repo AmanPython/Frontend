@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import BASE_URL from '../config'; 
 
 function UserRegistration() {
   const [username, setUsername] = useState('');
@@ -10,7 +11,7 @@ function UserRegistration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://192.168.29.170:8000/api/accounts/register/', {
+      const response = await axios.post(`${BASE_URL}/api/accounts/register/`, {
         username,
         email,
         password,

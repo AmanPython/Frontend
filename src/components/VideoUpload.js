@@ -1,6 +1,6 @@
 // src/components/VideoUpload.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from './axiosInstance';
 
 function VideoUpload() {
     const [file, setFile] = useState(null);
@@ -19,7 +19,7 @@ function VideoUpload() {
         formData.append("title", title); // Append title to the form data
         formData.append("video_file", file);
 
-        axios.post("http://192.168.29.170:8000/api/upload/", formData, {
+        axiosInstance.post("/api/upload/", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
